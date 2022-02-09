@@ -1,0 +1,33 @@
+:root{
+    --blanco: #ffffff;
+    --principal: rgb(0,46,99);
+    --Secundario: rgb(212,176,18);
+
+    --FuentePrincipal: 'Staaliches',cursive;
+}
+
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+    scroll-snap-type: y mandatory;
+}
+
+*,*:before,*:after{
+    box-sizing: inherit;
+}
+
+tr{
+    bgcolor: --principal;
+    font: --FuentePrincipal;
+}
+
+header{
+    bgcolor: --principal;
+    font: --FuentePrincipal;
+}
+
+#nav_principal li{
+    display: inline;
+    margin: 0 30px;
+
+}

@@ -1,0 +1,16 @@
+{% extends "inicio.html" %}
+{% load static %}
+{% block title %} Editar dependencia {% endblock %}
+
+{% block content %}
+
+    <form method="POST">
+    <h1>Editar Dependencia</h1>
+     <table>
+         {{formaDepe}}
+     </table>
+     <button type="submit">Enviar</button>
+        {% csrf_token %}
+    </form>
+
+{% endblock %}

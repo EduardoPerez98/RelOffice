@@ -1,0 +1,17 @@
+{%extends "inicio.html"%}
+{% load static %}
+{% block title %} Nueva dependencia {% endblock %}
+
+{% block content %}
+
+    <form method="POST">
+    <h1>Nueva Dependencia</h1>
+     <table>
+         {{formaDepe}}
+     </table>
+     <button type="submit">Enviar</button>
+        {% csrf_token %}
+    </form>
+
+
+{% endblock %}

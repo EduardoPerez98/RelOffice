@@ -1,0 +1,44 @@
+{% extends "inicio.html" %}
+{% load static %}
+{% block title %} Detalle {% endblock %}
+
+
+{% block content %}
+<div>Oficio numero: {{oficio.id}}</div>
+<!--ESTE DESMADRE NO SALIO A LA PRIMERA AHORA A INVESTIGAR COMO SE HACE -->
+
+<div>
+    <table border="0">
+        <thead>
+            <tr>
+                <th>Numero de oficio</th>
+                <th>Descripcion</th>
+                <th>Enviado a</th>
+                <th>No.pads</th>
+                <th>alcance</th>
+                <th>fecha</th>
+                <th>Pendientes</th>
+                <th>Sustituciones</th>
+                <th>Altas</th>
+                <th>Bajas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{oficio.n_oficio}}</td>
+                <td>{{oficio.descripcion}}</td>
+                <td>{{oficio.clave_depe}}</td>
+                <td>{{oficio.n_pads}}</td>
+                <td>{{oficio.alcance}}</td>
+                <td>{{oficio.fecha}}</td>
+                <td>{{oficio.pendientes}}</td>
+                <td>{{oficio.sustituciones}}</td>
+                <td>{{oficio.altas}}</td>
+                <td>{{oficio.bajas}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>Tabla que muestre, quien lo envio y una conexion que muestra cuantos ha enviado esa persona</p>
+{% endblock %}

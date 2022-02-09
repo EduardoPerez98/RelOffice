@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}  {% endblock %}</title>
+
+    <!--Estilos css-->
+    <link type="text/css" href='{% static "css/normalizer.css" %}' rel="preload">
+    <link type="text/css" rel="stylesheet" href='{% static "css/normalizer" %}'>
+    <link type="text/css" rel="preload" href='{% static "css/style.css" %}'>
+    <link type="text/css" rel="stylesheet" href='{% static "css/style.css" %}'>
+
+</head>
+<header>
+    <div >
+        <h1>Gestor de Oficios</h1><br><h4>Reporte Pad</h4>
+    </div>
+
+    <nav id="nav_principal">
+        <ul>
+            <li><a href="asignados.html">Dependencias</a></li>
+            <li><a href="analistas.html">Analistas</a></li>
+            <li><a href="historialofi.html">Historial</a></li>
+            <li><a href="nuevo_oficio">Agregar nuevo oficio</a></li>
+        </ul>
+    <div> <a href="{% url 'index' %}"> INICIO </a> </div>
+    </nav>
+</header>
+
+<body>
+
+    {% block content %}
+
+    <!--Aqui van los distintos contenidos de las distintas páginas-->
+
+    {% endblock %}
+
+</body>
+
+<footer>
+    <p>Este es el pie de página</p>
+</footer>
+</html>

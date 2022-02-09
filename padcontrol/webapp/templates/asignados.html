@@ -1,0 +1,40 @@
+{% extends 'inicio.html' %}
+{% load static %}
+{% block title %} Dependencias {% endblock %}
+
+{% block content %}
+    <h1>Dependencias y Analistas</h1>
+    <div>
+        <a href="nueva_depe">Agregar dependencia</a>
+    </div>
+
+    <div>
+        <div>
+            <h3>Número de Dependencias: {{no_depen}}</h3>
+        </div>
+        <table border="3">
+            <thead>
+                <tr>
+                    <th>CLAVE</th>
+                    <th>NOMBRE</th>
+                    <th>ANALISTA</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for dependencia in Dependencias %}
+            <tr>
+                <td>{{dependencia.clave}}</td>
+                <td>{{dependencia.nombre}}</td>
+                <td>{{dependencia.id_analista}}</td>
+                <td><a href="editar_depe/{{dependencia.clave}}">Editar</a></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}

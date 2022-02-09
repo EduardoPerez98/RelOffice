@@ -1,0 +1,15 @@
+{% extends "inicio.html" %}
+{% load static %}
+{% block title %} Analistas {% endblock %}
+
+{%block content%}
+
+<form method="POST">
+  <h1>Agregar un nuevo oficio</h1>
+  <table>
+    {{formaAna}}
+  </table>
+  <button type="submit">Enviar</button>
+    {% csrf_token %}
+</form>
+{%endblock%}

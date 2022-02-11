@@ -34,7 +34,7 @@ urlpatterns = [
     path('editar_depe', Editar_Depe),
 
     path('analistas.html', Analistas_asignados, name='analistas'),
-    path('editar_analista/<int:id>', Editar_Analista)
-
+    path('editar_analista/<int:id>', Editar_Analista),
+    path('reports', report) 
 ]
 

@@ -1,10 +1,10 @@
 import os
-from io import BytesIO
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4, cm
-from django.http import HttpResponse
 
+from django.views.generic import * #ListView, Views
+
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+
 # Create your views here.
 from gestion.forms import Oficioform, Depeform, Anaform
 from gestion.models import Oficios, Dependencias, Analistas
@@ -85,60 +85,20 @@ def Editar_Analista(request, id):
 
 
 #####
-def report(request):
-    response = HttpResponse(content_type='applicaction/pdf')
-    response['Content-Disposition'] = 'attachment: filename=Contrato-ingreso-asignatura.pdf'
-    buffer = BytesIO()
-    c = canvas.Canvas(buffer, pagesize=A4)
 
-    # ENCABEZADO DEL PDF
-    c.setLineWidth(.3)
-    c.setFont('Arial Narrow', 22)
-    c.drawString(30, 750, 'CONTRATO POR TIEMPO DETERMINADO')
+class ListaOficios(ListView):
+    model = Oficios
+    template_name = 'generadorpdf.html'
+    context_object_name = 'Oficios'
 
-    c.setFont('Arial Narrow-Bold', 12)
-    c.drawString(30, 735, 'UNIVERSIDAD AUTONOMA DE CHIAPAS')
 
-    c.setFont('Arial Narrow-Bold', 12)
-    c.drawString(480, 750, "11/02/2022")
-    c.line(460, 747, 560, 747)
-
-    styles = getSampleStyleSheet()
-    styleBH = styles["normal"]
-    styleBH.alignment = TA_CENTER
-    styleBH.fontSize = 14
-
-    numero = Paragraph('''No.''', styleBH)
-    nombrema = Paragraph('''Asignatura''', styleBH)
-    grupoma = Paragraph('''Grupo''', styleBH)
-    HSM = Paragraph('''H/S/M''', styleBH)
-    total = Paragraph('''Total''', styleBH)
-
-    data = []
-    data.append([numero, nombrema, grupoma, HSM, total])
-
-    styleN = styles["BodyText"]
-    styleN.alignment = TA_CENTER
-    styleN.fontSize = 8
-
-    high = 650
-    for asignatura in asignaturas:
-        this_asignatura = [asignatura['numero'], asignatura['nombrema'], asignatura['grupoma'], asignatura['HSM'],
-                           asignatura['total']]
-        data.append(this_asignatura)
-        high = high - 18
-
-    width, heigth = A4
-    table = Table(data, colWidths=[1.9 * cm, 9.5 * cm, 1.9 * cm, 1.9 * cm, 1.9 * cm])
-    table.setStyle(TableStyle([  # ESTILOS DE LA TABLA
-        ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-        ('BOX', (0, 0), (-1, -1), 0.25, colors.black)]))
-    table.wrapOn(c, width, height)
-    table.drawOn(c, 30, high)
-    c.showPage()
-
-    c.save()
-    pdf = buffer.getvalue()
-    buffer.close()
-    response.write(pdf)
-    return response
+class ListaOficiosPDF(View):
+    def get(self, request, *args, **kwargs):
+        oficios = Oficios.objects.all()
+        oficioscontar = Oficios.objects.count()
+        data = {
+            'Oficios': oficios,
+            'no_oficios': oficioscontar
+        }
+        pdf = render_to_pdf('generadorpdf.html', data)
+        return HttpResponse(pdf, content_type= 'application/pdf')

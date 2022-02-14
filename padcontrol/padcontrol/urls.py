@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.template.context_processors import static
 from django.urls import path
 
+
+from gestion.utils import generador_pdf
 from gestion.views import detalle_Oficio, Nuevo_Oficio, Editar_Oficio, Nueva_Depe, Editar_Depe, Editar_Analista
 from webapp.views import index, asignados, Analistas_asignados, Historial_ofi
 
@@ -35,6 +37,6 @@ urlpatterns = [
 
     path('analistas.html', Analistas_asignados, name='analistas'),
     path('editar_analista/<int:id>', Editar_Analista),
-    path('reports', report) 
+    path('generadorpdf.html', generador_pdf)
 ]
 

@@ -1,10 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<h1>Reporte Documentación</h1>
+
+    <div>
+        Numero de oficios: {{no_oficios}}
+    </div>
+
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>No. Oficio</th>
+                    <th>Descripcion</th>
+                    <th>Depentencia</th>
+                    <th>No. Reportes</th>
+                    <th>fecha</th>
+                </tr>
+            </thead>
+
+            <tbody>
+             {% for oficio in Oficios %}
+             <tr>
+                 <td>{{oficio.n_oficio}}</td>
+                 <td>{{oficio.descripcion}}</td>
+                 <td>{{oficio.clave_depe}}</td>
+                 <td>{{oficio.n_pads}}</td>
+                 <td>{{oficio.fecha}}</td>
+                 <td><button type="button"><a href="detalle_oficio/{{oficio.id}}">Ver detalle</a>  </button></td>
+                 <td><button type="button"><a href="editar_oficio/{{oficio.id}}">Editar</a>  </button></td>
+             </tr>
+             {% endfor %}
+             </tbody>
+        </table>
+    </div>

@@ -70,6 +70,17 @@ def Editar_Depe(request, clave):
 
 
 ###########
+def Nuevo_Analista(request):
+    if request.method == 'POST':
+        formaAna = Anaform(request.POST)
+        if formaAna.is_valid():
+            formaAna.save()
+        return redirect('analistas')
+    else:
+        formaAna = Anaform()
+
+    return render(request, 'analistas/nuevo_analista.html', {'formaAna': formaAna})
+
 
 def Editar_Analista(request, id):
     analista = get_object_or_404(Analistas, pk=id)
@@ -82,20 +93,6 @@ def Editar_Analista(request, id):
         formaAna = Anaform(instance=analista)
 
     return render(request, 'analistas/editar_analista.html', {'formaAna': formaAna})
-
-
-def Nuevo_Analista(request):
-    if request.method == 'POST':
-        formaAna = Anaform(request.POST)
-        if formaAna.is_valid():
-            formaAna.save()
-            return redirect('analistas')
-        else:
-            formaAna = Anaform()
-
-    return render(request, 'analistas/nuevo_analista.html', {'formaAna': formaAna})
-
-
 #####
 
 class ListaOficios(ListView):

@@ -1,6 +1,6 @@
 import os
 
-from django.views.generic import * #ListView, Views
+from django.views.generic import *  # ListView, Views
 
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -84,6 +84,18 @@ def Editar_Analista(request, id):
     return render(request, 'analistas/editar_analista.html', {'formaAna': formaAna})
 
 
+def Nuevo_Analista(request):
+    if request.method == 'POST':
+        formaAna = Anaform(request.POST)
+        if formaAna.is_valid():
+            formaAna.save()
+            return redirect('analistas')
+        else:
+            formaAna = Anaform()
+
+    return render(request, 'analistas/nuevo_analista.html', {'formaAna': formaAna})
+
+
 #####
 
 class ListaOficios(ListView):
@@ -101,4 +113,4 @@ class ListaOficiosPDF(View):
             'no_oficios': oficioscontar
         }
         pdf = render_to_pdf('generadorpdf.html', data)
-        return HttpResponse(pdf, content_type= 'application/pdf')
+        return HttpResponse(pdf, content_type='application/pdf')
